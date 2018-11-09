@@ -17,11 +17,11 @@
   计算属性存在缓存, 多次读取只执行一次getter计算
 -->
 <div id="demo">
-  姓: <input type="text" placeholder="First Name" v-model="firstName"><br>
+  姓: <input type="text" placeholder="First Name" v-model="firstName" ><br>
   名: <input type="text" placeholder="Last Name" v-model="lastName"><br>
   姓名1(单向): <input type="text" placeholder="Full Name1" v-model="fullName1"><br>
-  姓名2(单向): <input type="text" placeholder="Full Name2" ><br>
-  姓名3(双向): <input type="text" placeholder="Full Name3" v-model="fullName3"><br>
+  <!--姓名2(单向): <input type="text" placeholder="Full Name2" v-model="fullName2"><br>-->
+  <!--姓名3(双向): <input type="text" placeholder="Full Name3" v-model="fullName3"><br>-->
 </div>
 
 <script type="text/javascript" src="../js/vue.js"></script>
@@ -30,8 +30,10 @@
    el:'#demo',
    data:{
      firstName:'A',
+
      lastName:'B',
-     fullname1:'A-B'
+
+     fullName1:'A-B'
    },
    computed:{
      fullName1(){
@@ -48,8 +50,18 @@
          this.lastName=val[1]
        }
      },
-     watch:{
 
+   },
+   watch: {
+     // 监视firstName
+     firstName (value) {
+       // 更新fullName2
+       this.fullName2 = value + '-' + this.lastName
+     },
+     //监视lastName
+     lastName (value) {
+       // 更新fullName2
+       this.fullName2 = this.firstName + '-' + value
      }
    }
 
